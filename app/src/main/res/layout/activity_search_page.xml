@@ -9,12 +9,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="30sp">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="6"/>
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Address"
+            android:layout_weight="1"/>
+        <!--
+        <Spinner
+            android:id="@+id/spinner"
+            android:text="Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        -->
         <Button
             android:id="@+id/searchButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Search" />
+            android:text="Search"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="10"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
