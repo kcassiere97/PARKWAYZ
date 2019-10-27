@@ -17,192 +17,100 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-//Goals: Register user on the database
-//       then go back to Login Page for login
-
-
 
 public class RegistrationActivity extends AppCompatActivity {
-
-    //declare class variables
-
-    private EditText userEmail, userPassword, userPassword2, userName;
-    private ProgressBar loadingProgress;
-    private Button regButton;
-
+    // private variables to be used
+    private EditText userName, userPass, userEmail, userPass2;
+    private ProgressBar loadingProg;
+    private Button regBtn;
     private FirebaseAuth mAuth;
 
-
-
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registration);
 
-        //assign  variables to button ids
-
+        // setting value to variables by grabbing from the front-end of the login page
+        // by using findViewById();
         userEmail = findViewById(R.id.regEmail);
+        userPass = findViewById(R.id.regPassword);
+        userPass2 = findViewById(R.id.regPasswordConfirm);
         userName = findViewById(R.id.regName);
-        userPassword = findViewById(R.id.regPassword);
-        userPassword2 = findViewById(R.id.regPasswordConfirm);
-        loadingProgress = findViewById(R.id.RegProgressBar);
-        regButton = findViewById(R.id.RegBtn);
-        loadingProgress.setVisibility(View.INVISIBLE);
+        loadingProg = findViewById(R.id.RegProgressBar);
+        regBtn = findViewById(R.id.RegBtn);
+
+        loadingProg.setVisibility(View.INVISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
 
-
-        regButton.setOnClickListener(new View.OnClickListener() {
-
-
+        regBtn.setOnClickListener(new View.OnClickListener(){
             @Override
-
             public void onClick(View view){
-
-                regButton.setVisibility(View.INVISIBLE);
-                loadingProgress.setVisibility(View.INVISIBLE);
-
+                regBtn.setVisibility(View.INVISIBLE);
+                loadingProg.setVisibility(View.VISIBLE);
                 final String email = userEmail.getText().toString();
-                final String password = userPassword.getText().toString();
-                final String password2 =  userPassword2.getText().toString();
+                final String password = userPass.getText().toString();
+                final String password2 = userPass2.getText().toString();
                 final String name = userName.getText().toString();
 
-                //checks for valid reasons to continue
-                if(email.isEmpty() || name.isEmpty() || password.isEmpty() || password2.isEmpty() || !password.equals(password2)){
-
-                    //all fields must be filled
-                    //show error message
-
-                    showMessage("Please Enter All Fields Accurately");
-                    regButton.setVisibility(View.VISIBLE);
-                    loadingProgress.setVisibility(View.INVISIBLE);
-
-
+                // display error message if not all fields are filled out the passwords do not match
+                if (email.isEmpty() || name.isEmpty() || password.isEmpty() || password2.isEmpty() || !password.equals(password2))  {
+                    showMessage("Please fill out all fields!");
+                    regBtn.setVisibility(View.VISIBLE);
+                    loadingProg.setVisibility(View.INVISIBLE);
                 }
-                else{
-
-                    //everything looks good and ready to create user account
-
-                    createUserAccount(email,name,password);
-
-                    goToLoginPage();
-
-
-
+                else {
+                    // create a new user in Firebase
+                    CreateUserAccount(email, password);
                 }
-
-
-
             }
-
-
-
-
         });
-
-
-
-        setContentView(R.layout.activity_registration);
     }
 
-    //Display Message
-    private void showMessage(String message){
-
-        //Toast lets you display
-        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-
-
-    }
-
-    //go to login page
-
-    public  void goToLoginPage(){
-
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
-
-    }
-
-
-
-
-
-
-    //create user account method
-
-    private void createUserAccount(String email, final String name, String password){
-
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this,new OnCompleteListener<AuthResult>(){
-
-
+    // function to create a new user in Firebase
+    private void CreateUserAccount(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
-            public  void onComplete(@NonNull Task<AuthResult> task){
-
-                if(task.isSuccessful()) {
-
-                    //account created failed
-                    showMessage("Account Created");
-
-                    //update name
-//                    updateUserInfo(name,mAuth.getCurrentUser());
-
-
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    // user account successfully created
+                    showMessage("Account created.");
+                    updateUserInfo(userName.toString(), mAuth.getCurrentUser());
                 }
-                else{
-
-                    //account created failed
-                    showMessage("Account Creation Failed" + task.getException().getMessage());
-                    regButton.setVisibility(View.INVISIBLE);
-                    loadingProgress.setVisibility(View.INVISIBLE);
-
-
+                else {
+                    showMessage("Failed to create account." + task.getException().getMessage());
+                    regBtn.setVisibility(View.VISIBLE);
+                    loadingProg.setVisibility(View.INVISIBLE);
                 }
-
             }
-
-
-
         });
-
-
     }
 
-//    private void updateUserInfo(String name, FirebaseUser currentUser){
-//
-//      StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_name");
-//      StorageReference nameFilePath = mStorage.child(name.getLastPathSegment());
-//      nameFilePath.putFile()
-//
-//
-//        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest().Builder()
-//                    .setDisplayName(name)
-//                    .build();
-//
-//
-//
-//
-//
-//
-//    }
+    private void updateUserInfo(String name, FirebaseUser currentUser){
+        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+        currentUser.updateProfile(profileUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    // successfully updated user info
+                    showMessage("Account registered!");
+                    updateUI();
+                }
+            }
+        });
+    }
 
+    private void updateUI() {
+        Intent HomeActivity = new Intent(getApplicationContext(), com.example.parkwayz.HomeActivity.class);
+        startActivity(HomeActivity);
+        finish();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // simple method to toast (display) message
+    private void showMessage(String text) {
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+    }
 
 }
