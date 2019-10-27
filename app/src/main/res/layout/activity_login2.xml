@@ -12,11 +12,11 @@
         android:id="@+id/RegBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="232dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginLeft="162dp"
-        android:layout_marginRight="162dp"
         android:layout_marginStart="162dp"
+        android:layout_marginLeft="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginRight="162dp"
+        android:layout_marginBottom="260dp"
         android:background="@drawable/submit_button"
         android:text="@string/signin"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         android:autofillHints="@string/prompt_email"
         android:background="@drawable/reg_edittext_style"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/regPassword"
@@ -46,7 +46,7 @@
         android:layout_marginBottom="76dp"
         android:background="@drawable/reg_edittext_style"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/prompt_password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/RegBtn"
@@ -64,6 +64,21 @@
         app:layout_constraintStart_toStartOf="@+id/RegBtn"
         app:layout_constraintTop_toTopOf="@+id/RegBtn"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/newUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginLeft="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginRight="162dp"
+        android:layout_marginBottom="210dp"
+        android:background="@android:color/transparent"
+        android:text="New user? Click here!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
