@@ -3,14 +3,6 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.parkwayz">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
-
-
-    <dist:module dist:instant="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,15 +12,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RegistrationActivity">
 
-
-        <activity
-            android:name=".SearchActivity"
-            android:parentActivityName=".HomeActivity"
-            android:label="Enter location">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
         </activity>
         <activity android:name=".LoginActivity">
 
@@ -39,24 +22,26 @@
             </intent-filter>
 
         </activity>
-
-        <activity
+        <activity android:name=".SearchActivity" /><activity
             android:name=".MapsActivity"
-            android:parentActivityName=".SearchActivity"
-            android:label="@string/map_title">
-
+            android:label="@string/map_title"
+            android:parentActivityName=".SearchActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MapsActivity" />
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_api_key" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <dist:module dist:instant="true" />
 
 </manifest>
