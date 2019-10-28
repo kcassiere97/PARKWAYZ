@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    //Adds the required permission request
     <uses-permission android:name="android.permission.INTERNET" />
 
 
@@ -19,17 +18,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RegistrationActivity">
 
-        <activity android:name=".SearchActivity"></activity>
 
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/app_name">
+            android:name=".SearchActivity"
+            android:parentActivityName=".HomeActivity"
+            android:label="Enter location">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity
@@ -40,9 +48,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MapsActivity" />
-
         </activity>
-
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"></activity>
@@ -51,5 +57,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_api_key" />
     </application>
+
 
 </manifest>
