@@ -9,12 +9,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="30sp">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"/>
 
         <Button
             android:id="@+id/findParkingButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Find Parking" />
+            android:text="Find Parking"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/manageParking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Parking"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
