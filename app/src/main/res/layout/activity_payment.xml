@@ -132,6 +132,7 @@
         android:gravity="center_horizontal"
         android:text="Google Pay"
         android:textSize="32"
+        android:background="#00D9FF"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:layout_editor_absoluteX="62dp" />
 
@@ -152,6 +153,7 @@
         android:gravity="center_horizontal"
         android:text="GO"
         android:textSize="32"
+        android:background="#FF0B0B"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
