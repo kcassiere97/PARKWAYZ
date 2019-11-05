@@ -15,7 +15,9 @@
         android:padding="5dp"
         android:text="$5 per day"
         android:textColor="#fff"
-        android:textSize="32" />
+        android:textSize="32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
@@ -79,8 +81,9 @@
         android:text="Total = $5"
         android:textColor="#fff"
         android:textSize="32"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
-        tools:layout_editor_absoluteX="-1dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
     <TextView
         android:id="@+id/textView6"
@@ -132,13 +135,13 @@
         android:layout_width="349dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:background="#fff"
         android:gravity="center_horizontal"
         android:text="Google Pay"
-        android:textSize="32"
-        android:background="#fff"
         android:textColor="#000"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:layout_editor_absoluteX="62dp" />
+        android:textSize="32"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <CheckBox
         android:id="@+id/checkBox1"
