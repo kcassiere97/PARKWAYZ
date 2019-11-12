@@ -40,14 +40,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.fragment_home);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     //Creates homeowner locally from token
@@ -96,7 +96,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         String name;
         boolean isAvailable;
 
-        public Owner(String address, String name, boolean isAvailable){
+        private Owner(String address, String name, boolean isAvailable){
 
             this.address = address;
             this.name = name;

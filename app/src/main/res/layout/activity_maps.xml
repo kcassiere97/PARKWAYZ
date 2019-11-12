@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="9"
-        tools:context=".MapsActivity" />
+        tools:context=".HomeActivity" />
 
     <TextView
         android:id="@+id/LocInfo"
